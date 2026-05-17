@@ -306,7 +306,7 @@ module.exports = {
             for (let i = 0; i < Math.min(tracksToQueue.length, maxTracks); i++) {
                 const trackQuery = tracksToQueue[i];
                 try {
-                    const resolve = await client.riffy.resolve({ query: `ytsearch:${trackQuery}`, requester: interaction.user.username });
+                    const resolve = await client.riffy.resolve({ query: trackQuery, requester: interaction.user.username });
                     if (resolve && resolve.tracks && resolve.tracks.length > 0) {
                         const trackInfo = resolve.tracks[0];
                         player.queue.add(trackInfo);
