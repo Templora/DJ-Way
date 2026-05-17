@@ -239,7 +239,16 @@ function buildCard(title, sections, actionRows = [], banner = null) {
   return container;
 }
 
+function buildHelpBanner() {
+  const bannerUrl = String(config.helpBannerUrl || '').trim();
+  if (!bannerUrl) return null;
 
+  try {
+    // Validate URL once to avoid API errors from malformed config values.
+    new URL(bannerUrl);
+  } catch (_) {
+    return null;
+  }
 
   return new MediaGalleryBuilder().addItems(
     (mediaItem) => mediaItem
