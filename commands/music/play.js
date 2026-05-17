@@ -105,7 +105,7 @@ module.exports = {
                             const choices = resolve.tracks.slice(0, 25).map(track => {
                                 const info = track.info;
                                 const duration = formatDuration(info.length);
-                                const display = `${info.title} - ${info.author} (${duration})`;
+                                const display = `${info.title} - ${info.author}`;
                                 return {
                                     name: display.length > 100 ? display.substring(0, 97) + '...' : display,
                                     value: info.uri || query
