@@ -85,11 +85,6 @@ module.exports = {
         try {
             // Handle autocomplete
             if (interaction.isAutocomplete()) {
-                
-                if (query.startsWith('http')) {
-                    return interaction.respond([]);
-                }
-                
                 const focusedOption = interaction.options.getFocused(true);
                 if (focusedOption.name === 'name') {
                     const query = focusedOption.value;
@@ -113,7 +108,7 @@ module.exports = {
                                 const display = `${info.title}`;
                                 return {
                                     name: display.length > 100 ? display.substring(0, 97) + '...' : display,
-                                    value: info.title
+                                    value: info.uri || query
                                 };
                             });
                             return interaction.respond(choices);
@@ -129,10 +124,8 @@ module.exports = {
 
             const lang = await getLang(interaction.guildId);
             const t = lang.music.play;
-            
+
             const query = interaction.options.getString('name');
-            
-            query = query.trim().replace(/^<|>$/g, '');
 
             const deferred = await safeDeferReply(interaction);
 
