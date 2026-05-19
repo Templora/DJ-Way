@@ -129,14 +129,10 @@ module.exports = {
 
             const lang = await getLang(interaction.guildId);
             const t = lang.music.play;
-
-            const query = interaction.options.getString('name');
-
+            
             let query = interaction.options.getString('name');
             
-            query = query
-                ?.trim()
-                ?.replace(/^<|>$/g, '');
+            query = query.trim().replace(/^<|>$/g, '');
 
             const deferred = await safeDeferReply(interaction);
 
