@@ -130,7 +130,7 @@ module.exports = {
             const lang = await getLang(interaction.guildId);
             const t = lang.music.play;
             
-            let query = interaction.options.getString('name');
+            const query = interaction.options.getString('name');
             
             query = query.trim().replace(/^<|>$/g, '');
 
