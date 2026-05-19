@@ -99,7 +99,13 @@ module.exports = {
                         }
 
                         await nodeManager.ensureNodeAvailable();
-                        const resolve = await client.riffy.resolve({ query, requester: interaction.user.username });
+                        
+                        const isUrl = /^https?:\/\//i.test(query);
+                        
+                        resolve = await client.riffy.resolve({
+                            query: isUrl ? query : `ytsearch:${query}`,
+                            requester: interaction.user.username
+                        });
 
                         if (resolve && resolve.tracks && resolve.tracks.length > 0) {
                             const choices = resolve.tracks.slice(0, 25).map(track => {
@@ -255,7 +261,11 @@ module.exports = {
             } else {
                 let resolve;
                 try {
-                    resolve = await client.riffy.resolve({ query, requester: interaction.user.username });
+                    isUrl = /^https?:\/\//i.test(query);
+                    resolve = await client.riffy.resolve({
+                        query: isUrl ? query : `ytsearch:${query}`,
+                        requester: interaction.user.username
+                    });
                 } catch (err) {
                     const msg = err?.message || '';
                     if (msg.includes('fetch failed') || msg.includes('No nodes are available') || (err.cause && err.cause.code === 'ECONNREFUSED')) {
