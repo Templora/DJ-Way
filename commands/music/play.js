@@ -100,12 +100,7 @@ module.exports = {
 
                         await nodeManager.ensureNodeAvailable();
                         
-                        const isUrl = /^https?:\/\//i.test(query);
-                        
-                        resolve = await client.riffy.resolve({
-                            query: isUrl ? query : `ytsearch:${query}`,
-                            requester: interaction.user.username
-                        });
+                        const resolve = await client.riffy.resolve({ query, requester: interaction.user.username });
 
                         if (resolve && resolve.tracks && resolve.tracks.length > 0) {
                             const choices = resolve.tracks.slice(0, 25).map(track => {
@@ -261,10 +256,7 @@ module.exports = {
             } else {
                 let resolve;
                 try {
-                    isUrl = /^https?:\/\//i.test(query);
-                    resolve = await client.riffy.resolve({
-                        query: isUrl ? query : `ytsearch:${query}`,
-                        requester: interaction.user.username
+                    resolve = await client.riffy.resolve({ query, requester: interaction.user.username });
                     });
                 } catch (err) {
                     const msg = err?.message || '';
