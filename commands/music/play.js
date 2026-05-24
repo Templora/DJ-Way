@@ -257,7 +257,6 @@ module.exports = {
                 let resolve;
                 try {
                     resolve = await client.riffy.resolve({ query, requester: interaction.user.username });
-                    });
                 } catch (err) {
                     const msg = err?.message || '';
                     if (msg.includes('fetch failed') || msg.includes('No nodes are available') || (err.cause && err.cause.code === 'ECONNREFUSED')) {
